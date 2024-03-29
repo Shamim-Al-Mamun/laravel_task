@@ -25,12 +25,8 @@ Route::middleware(['api.auth'])->group(function () {
     Route::delete('/users/{user}', 'UserController@destroy');
 });
 
-
+// User Role Permission routes
 Route::middleware('auth:api')->get('/articles', 'ArticleController@index');
 Route::middleware('auth:api')->post('/articles', 'ArticleController@store');
 Route::middleware('auth:api')->put('/articles/{article}', 'ArticleController@update');
 Route::middleware('auth:api')->delete('/articles/{article}', 'ArticleController@destroy');
-
-Route::middleware('auth:api', 'role:admin')->get('/admin-only-endpoint', function (Request $request) {
-    return response()->json(['message' => 'You have access to this admin-only endpoint.']);
-});
